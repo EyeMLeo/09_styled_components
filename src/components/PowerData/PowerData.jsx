@@ -2,18 +2,27 @@ import { Container, Grid, Section } from './../styled/UI.styled';
 import SectionTitle from './../UI/sectionTitle/SectionTitle';
 import styled from 'styled-components';
 
-export const H3Title = styled.h3`
+const H3Title = styled.h3`
   color: #22c55e;
   font-size: 48px;
   margin-bottom: 0px;
 `;
 
+const OneCard = styled.div`
+  text-align: center;
+`;
+
+const CardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+`;
+
 const sectionData = {
   sectionTitle: {
     pill: 'Features',
-    title: 'We believe in the power of data',
-    subtitle:
+    title:
       'Flex is the only business platform that lets you run your business on one platform, seamlessly across all digital channels.',
+    subtitle: 'We believe in the power of data',
   },
   gainCards: [
     {
@@ -39,19 +48,35 @@ const sectionData = {
   ],
 };
 
+function SingleCard(props) {
+  return (
+    <OneCard>
+      <H3Title>{props.title}</H3Title>
+      <p>{props.text}</p>
+    </OneCard>
+  );
+}
+
 function PowerData(props) {
   return (
     <Section>
       <Container>
         <SectionTitle
-          pill="FEATURES"
-          subtitle=" Flex is the only business platform that lets you run your business on one platform, seamlessly across all digital channels."
-          title="We believe in the power of data"
+          pill={sectionData.sectionTitle.pill}
+          subtitle={sectionData.sectionTitle.title}
+          title={sectionData.sectionTitle.subtitle}
         />
-        <div>
+        {/* <div>
           <H3Title>235.00</H3Title>
           <p>Projects completed</p>
-        </div>
+        </div> */}
+
+        <CardGrid>
+          {/* mapinti sectionData.gainCards ir gaminti SingleCard elementus */}
+          {sectionData.gainCards.map((gObj) => (
+            <SingleCard key={gObj.id} title={gObj.title} text={gObj.descr} />
+          ))}
+        </CardGrid>
       </Container>
     </Section>
   );
